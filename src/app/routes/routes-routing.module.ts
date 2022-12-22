@@ -30,7 +30,8 @@ const routes: Routes = [
       { path: 'style', loadChildren: () => import('./style/style.module').then(m => m.StyleModule) },
       { path: 'delon', loadChildren: () => import('./delon/delon.module').then(m => m.DelonModule) },
       { path: 'extras', loadChildren: () => import('./extras/extras.module').then(m => m.ExtrasModule) },
-      { path: 'pro', loadChildren: () => import('./pro/pro.module').then(m => m.ProModule) }
+      { path: 'pro', loadChildren: () => import('./pro/pro.module').then(m => m.ProModule) },
+      { path: 'videris', loadChildren: () => import('./videris/videris.module').then(m => m.ViderisModule) }
     ]
   },
   // Blak Layout 空白布局

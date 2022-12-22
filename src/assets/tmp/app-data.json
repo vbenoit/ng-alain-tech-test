@@ -55,6 +55,13 @@
           "link": "/widgets",
           "icon": "anticon-appstore",
           "badge": 2
+        },
+        {
+          "text": "小",
+          "i18n": "menu.videris",
+          "link": "/videris",
+          "icon": "anticon-appstore",
+          "badge": 1
         }
       ]
     },
