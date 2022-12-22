@@ -1,16 +1,15 @@
 import { NgModule, Type } from '@angular/core';
-import { G2MiniAreaModule } from '@delon/chart/mini-area';
-import { G2MiniBarModule } from '@delon/chart/mini-bar';
+import { ChartEChartsModule } from '@delon/chart/chart-echarts';
 import { SharedModule } from '@shared';
-import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 import { ViderisRoutingModule } from './videris-routing.module';
-import { ViderisComponent } from './videris/videris.component';
+import { BloodSaturationChartComponent } from './videris/charts/blood-saturation.component';
+import { ViderisMenuComponent } from './videris/menu/videris.menu.component';
 
-const COMPONENTS: Array<Type<void>> = [ViderisComponent];
+const COMPONENTS: Array<Type<void>> = [ViderisMenuComponent, BloodSaturationChartComponent];
 
 @NgModule({
-  imports: [SharedModule, ViderisRoutingModule, NzCarouselModule, G2MiniBarModule, G2MiniAreaModule],
+  imports: [SharedModule, ViderisRoutingModule, ChartEChartsModule],
   declarations: COMPONENTS
 })
 export class ViderisModule {}
