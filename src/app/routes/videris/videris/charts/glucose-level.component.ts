@@ -1,40 +1,42 @@
-import { Component } from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChartEChartsComponent, ChartEChartsOption, ChartEChartsOn } from '@delon/chart/chart-echarts';
+import { OnboardingService } from '@delon/abc/onboarding';
+import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'glucose-level-chart',
-  template: `
-    <p class="">
-      <button (click)="returnToMenu()">Return to menu</button>
-    </p>
-    <chart-echarts [option]="option"> </chart-echarts>
-  `
+  template: ` <p class="">
+    <button (click)="returnToMenu()">Return to menu glucose</button>
+  </p>`
+  //<g2-timeline [data]="offlineChartData" [titleMap]="{ y1: 'abs', y2: 'ord' }"></g2-timeline>
+
+  //<chart-echarts [option]="option"> </chart-echarts>
 })
-export class GlucoseLevelChartComponent {
+export class GlucoseLevelChartComponent implements OnInit {
   dark = false;
   two = false;
 
-  option: ChartEChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: [150, 120, 130, 120, 130, 150, 120],
-        type: 'line'
-      }
-    ]
-  };
+  offlineChartData!: any[];
 
-  constructor(private msg: NzMessageService, private router: Router) {}
+  constructor(
+    private msg: NzMessageService,
+    private router: Router,
+    private http: _HttpClient,
+    private cdr: ChangeDetectorRef,
+    private obSrv: OnboardingService,
+    private platform: Platform
+  ) {}
 
   returnToMenu() {
     this.router.navigate(['/videris']);
+  }
+
+  ngOnInit(): void {
+    this.http.get('/chart').subscribe(res => {
+      this.offlineChartData = res.offlineChartData;
+      this.cdr.detectChanges();
+    });
   }
 }
